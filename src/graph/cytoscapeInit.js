@@ -1,6 +1,6 @@
 // src/graph/cytoscapeInit.js
 
-import cytoscape from 'cytoscape';
+const cytoscape = window.cytoscape;
 import { getFreshCytoscapeStyles } from './cytoscapeStyles.js';
 import {
   setCyInstance,
