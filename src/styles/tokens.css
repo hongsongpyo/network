@@ -1,0 +1,174 @@
+/* =========================
+   Design Tokens (Global)
+   ========================= */
+
+:root {
+  /* =========================
+     Color System (Dark Default)
+     ========================= */
+  --color-bg: #0b1020;
+  --color-bg-alt: #0f172a;
+
+  --color-panel: rgba(255, 255, 255, 0.06);
+  --color-panel-strong: rgba(255, 255, 255, 0.1);
+  --color-border: rgba(255, 255, 255, 0.12);
+
+  --color-text: #f5f7fb;
+  --color-text-muted: #a9b1c6;
+  --color-text-dim: #7b849a;
+
+  --color-accent: #6ea8fe;
+  --color-accent-strong: #4f8df7;
+  --color-accent-soft: rgba(110, 168, 254, 0.15);
+
+  --color-success: #7ef0c2;
+  --color-warning: #ffcc66;
+  --color-danger: #ff7b7b;
+
+  /* =========================
+     Graph Colors
+     ========================= */
+  --color-node: #6ea8fe;
+  --color-node-highlight: #7ef0c2;
+  --color-node-dim: rgba(255, 255, 255, 0.2);
+
+  --color-edge: #7c8aa5;
+  --color-edge-highlight: #7ef0c2;
+  --color-edge-dim: rgba(255, 255, 255, 0.15);
+
+  /* =========================
+     Typography
+     ========================= */
+  --font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --font-size-xs: 11px;
+  --font-size-sm: 12px;
+  --font-size-md: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 18px;
+  --font-size-2xl: 22px;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 600;
+
+  --line-height-base: 1.5;
+
+  /* =========================
+     Spacing
+     ========================= */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+
+  /* =========================
+     Radius
+     ========================= */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+
+  /* =========================
+     Shadows
+     ========================= */
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.25);
+
+  /* =========================
+     Transition
+     ========================= */
+  --transition-fast: 120ms ease;
+  --transition-base: 180ms ease;
+  --transition-slow: 260ms ease;
+
+  /* =========================
+     Z-index
+     ========================= */
+  --z-tooltip: 1000;
+  --z-overlay: 900;
+  --z-panel: 100;
+}
+
+/* =========================
+   Light Theme Override
+   ========================= */
+
+[data-theme="light"] {
+  --color-bg: #f4f6fb;
+  --color-bg-alt: #ffffff;
+
+  --color-panel: rgba(255, 255, 255, 0.9);
+  --color-panel-strong: rgba(255, 255, 255, 1);
+  --color-border: rgba(0, 0, 0, 0.08);
+
+  --color-text: #1a2233;
+  --color-text-muted: #5c667a;
+  --color-text-dim: #8892a6;
+
+  --color-node: #4f8df7;
+  --color-node-highlight: #38d9a9;
+
+  --color-edge: #9aa6bd;
+  --color-edge-highlight: #38d9a9;
+}
+
+/* =========================
+   Global Base Reset (Lightweight)
+   ========================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-base);
+
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+/* =========================
+   Utility Classes
+   ========================= */
+
+.hidden {
+  display: none !important;
+}
+
+.text-muted {
+  color: var(--color-text-muted);
+}
+
+.text-dim {
+  color: var(--color-text-dim);
+}
+
+.accent {
+  color: var(--color-accent);
+}
+
+.bg-panel {
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.shadow {
+  box-shadow: var(--shadow-md);
+}
+
+.transition {
+  transition: all var(--transition-base);
+}

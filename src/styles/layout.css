@@ -1,0 +1,360 @@
+/* =========================
+   App Shell
+   ========================= */
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-4);
+}
+
+/* =========================
+   Header
+   ========================= */
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  min-height: 72px;
+  padding: var(--space-4) var(--space-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-panel);
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(16px);
+}
+
+.app-header__left {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.app-logo {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.03em;
+  color: var(--color-text);
+}
+
+.app-subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.app-header__right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-shrink: 0;
+}
+
+/* =========================
+   Main Dashboard Layout
+   ========================= */
+
+.app-main {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr) 340px;
+  gap: var(--space-4);
+}
+
+/* =========================
+   Left Sidebar
+   ========================= */
+
+.app-sidebar {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  overflow: auto;
+}
+
+/* =========================
+   Center Canvas Area
+   ========================= */
+
+.app-canvas {
+  min-width: 0;
+  min-height: 0;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: var(--space-4);
+}
+
+.graph-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  min-height: 64px;
+}
+
+.toolbar-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.graph-stage {
+  position: relative;
+  min-height: 560px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)),
+    var(--color-panel);
+  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(12px);
+}
+
+.graph-container {
+  width: 100%;
+  height: 100%;
+  min-height: 560px;
+}
+
+.graph-stage__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-overlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+  pointer-events: none;
+}
+
+.bottom-panel {
+  min-height: 140px;
+}
+
+/* =========================
+   Right Inspector
+   ========================= */
+
+.app-inspector {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  overflow: auto;
+}
+
+/* =========================
+   Shared Panel Spacing Helpers
+   ========================= */
+
+#dataset-panel,
+#filters-panel,
+#edit-panel,
+#metrics-menu-panel,
+#summary-panel,
+#detail-panel,
+#metric-result-panel,
+#activity-panel {
+  flex-shrink: 0;
+}
+
+/* =========================
+   Metrics Button Grid
+   ========================= */
+
+.metric-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2);
+}
+
+/* =========================
+   Empty State
+   ========================= */
+
+.empty-state-card {
+  width: min(420px, 100%);
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: rgba(11, 16, 32, 0.72);
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+  backdrop-filter: blur(12px);
+}
+
+.empty-state-card__title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+}
+
+.empty-state-card__text {
+  margin-top: var(--space-3);
+  font-size: var(--font-size-md);
+  color: var(--color-text-muted);
+}
+
+/* =========================
+   Info / Result Layout Helpers
+   ========================= */
+
+.info-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.info-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.info-value {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+}
+
+.detail-placeholder,
+.result-placeholder {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.result-placeholder__title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+}
+
+.result-placeholder__text {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+/* =========================
+   Activity Log
+   ========================= */
+
+.activity-log {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.activity-log__item {
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.03);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  word-break: break-word;
+}
+
+/* =========================
+   Responsive
+   ========================= */
+
+@media (max-width: 1440px) {
+  .app-main {
+    grid-template-columns: 280px minmax(0, 1fr) 300px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .app-main {
+    grid-template-columns: 280px minmax(0, 1fr);
+  }
+
+  .app-inspector {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-4);
+  }
+}
+
+@media (max-width: 960px) {
+  .app-shell {
+    padding: var(--space-3);
+  }
+
+  .app-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .app-header__right {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .app-main {
+    grid-template-columns: 1fr;
+  }
+
+  .app-sidebar,
+  .app-inspector {
+    overflow: visible;
+  }
+
+  .app-inspector {
+    display: flex;
+  }
+
+  .graph-stage,
+  .graph-container {
+    min-height: 460px;
+  }
+}
+
+@media (max-width: 640px) {
+  .app-shell {
+    gap: var(--space-3);
+  }
+
+  .app-header {
+    padding: var(--space-4);
+  }
+
+  .app-logo {
+    font-size: var(--font-size-xl);
+  }
+
+  .graph-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .toolbar-group {
+    width: 100%;
+  }
+
+  .graph-stage,
+  .graph-container {
+    min-height: 380px;
+  }
+
+  .empty-state-card {
+    padding: var(--space-5);
+  }
+}

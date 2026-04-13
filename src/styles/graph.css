@@ -1,0 +1,527 @@
+/* =========================
+   Graph Stage
+   ========================= */
+
+.graph-stage {
+  position: relative;
+  isolation: isolate;
+}
+
+.graph-stage::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(circle at center, black 58%, transparent 100%);
+  opacity: 0.38;
+}
+
+.graph-stage::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 20% 18%, rgba(110, 168, 254, 0.12), transparent 22%),
+    radial-gradient(circle at 82% 24%, rgba(126, 240, 194, 0.08), transparent 18%),
+    radial-gradient(circle at 50% 82%, rgba(255, 123, 123, 0.06), transparent 18%);
+  opacity: 0.95;
+}
+
+.graph-container {
+  position: relative;
+  z-index: 1;
+  border-radius: inherit;
+}
+
+/* =========================
+   Graph Toolbar
+   ========================= */
+
+.graph-toolbar {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-panel);
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(14px);
+}
+
+.graph-toolbar .toolbar-group {
+  min-width: 0;
+}
+
+.graph-toolbar .btn {
+  min-height: 36px;
+}
+
+/* =========================
+   Graph Empty / Overlay States
+   ========================= */
+
+.graph-stage__overlay {
+  z-index: var(--z-overlay);
+}
+
+.graph-stage__overlay.is-hidden {
+  display: none;
+}
+
+.empty-state-card {
+  position: relative;
+  pointer-events: auto;
+}
+
+.empty-state-card::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    rgba(110, 168, 254, 0.22),
+    rgba(126, 240, 194, 0.14),
+    rgba(255, 255, 255, 0.02)
+  );
+  opacity: 0.7;
+}
+
+.empty-state-card__title {
+  letter-spacing: -0.025em;
+}
+
+.empty-state-card__text {
+  line-height: 1.7;
+}
+
+/* =========================
+   Graph Tooltip
+   ========================= */
+
+.graph-tooltip {
+  position: absolute;
+  z-index: var(--z-tooltip);
+  min-width: 200px;
+  max-width: 320px;
+  padding: var(--space-4);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius-md);
+  background: rgba(10, 14, 28, 0.9);
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(16px);
+  color: var(--color-text);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(6px) scale(0.98);
+  transform-origin: top left;
+  transition:
+    opacity var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.graph-tooltip:not([hidden]) {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.graph-tooltip__title {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+}
+
+.graph-tooltip__subtitle {
+  margin-top: 2px;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-dim);
+}
+
+.graph-tooltip__section {
+  margin-top: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.graph-tooltip__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.graph-tooltip__label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.graph-tooltip__value {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+}
+
+.graph-tooltip__divider {
+  margin-top: var(--space-3);
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.graph-tooltip__tag-row {
+  margin-top: var(--space-3);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+/* =========================
+   Graph HUD / Corner Widgets
+   ========================= */
+
+.graph-hud {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.graph-hud--top-left {
+  top: var(--space-4);
+  left: var(--space-4);
+}
+
+.graph-hud--top-right {
+  top: var(--space-4);
+  right: var(--space-4);
+}
+
+.graph-hud--bottom-left {
+  bottom: var(--space-4);
+  left: var(--space-4);
+}
+
+.graph-hud--bottom-right {
+  bottom: var(--space-4);
+  right: var(--space-4);
+}
+
+.graph-hud-card {
+  min-width: 160px;
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: rgba(11, 16, 32, 0.72);
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(12px);
+}
+
+.graph-hud-card__title {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-dim);
+}
+
+.graph-hud-card__value {
+  margin-top: var(--space-1);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+}
+
+.graph-hud-card__sub {
+  margin-top: var(--space-1);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+/* =========================
+   Graph Legend
+   ========================= */
+
+.graph-legend {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: rgba(11, 16, 32, 0.72);
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(12px);
+}
+
+.graph-legend__title {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-dim);
+}
+
+.graph-legend__items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.graph-legend__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.graph-legend__dot,
+.graph-legend__line {
+  flex-shrink: 0;
+}
+
+.graph-legend__dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: var(--color-node);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.04);
+}
+
+.graph-legend__dot--highlight {
+  background: var(--color-node-highlight);
+}
+
+.graph-legend__dot--dim {
+  background: var(--color-node-dim);
+}
+
+.graph-legend__line {
+  width: 18px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--color-edge);
+}
+
+.graph-legend__line--highlight {
+  background: var(--color-edge-highlight);
+}
+
+.graph-legend__line--dim {
+  background: var(--color-edge-dim);
+}
+
+/* =========================
+   Selection / Compare Panels Inside Graph
+   ========================= */
+
+.graph-selection-card,
+.graph-compare-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-width: 220px;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: rgba(10, 14, 28, 0.8);
+  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(16px);
+}
+
+.graph-selection-card__title,
+.graph-compare-card__title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+}
+
+.graph-selection-card__meta,
+.graph-compare-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.graph-selection-card__body,
+.graph-compare-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.graph-selection-card__row,
+.graph-compare-card__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  font-size: var(--font-size-xs);
+}
+
+.graph-selection-card__label,
+.graph-compare-card__label {
+  color: var(--color-text-muted);
+}
+
+.graph-selection-card__value,
+.graph-compare-card__value {
+  color: var(--color-text);
+  font-weight: var(--font-weight-bold);
+}
+
+/* =========================
+   Graph Loading State
+   ========================= */
+
+.graph-loading {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-overlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(11, 16, 32, 0.52);
+  backdrop-filter: blur(4px);
+}
+
+.graph-loading__card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: rgba(10, 14, 28, 0.88);
+  box-shadow: var(--shadow-lg);
+}
+
+.graph-loading__spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.14);
+  border-top-color: var(--color-accent);
+  border-radius: 999px;
+  animation: graphSpin 0.9s linear infinite;
+}
+
+.graph-loading__text {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+/* =========================
+   Graph Minimap Shell
+   ========================= */
+
+.graph-minimap {
+  width: 180px;
+  height: 120px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: rgba(10, 14, 28, 0.72);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+}
+
+/* =========================
+   Motion
+   ========================= */
+
+@keyframes graphSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================
+   Light Theme
+   ========================= */
+
+[data-theme="light"] .graph-stage::before {
+  background:
+    linear-gradient(rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+}
+
+[data-theme="light"] .graph-stage::after {
+  background:
+    radial-gradient(circle at 20% 18%, rgba(79, 141, 247, 0.1), transparent 22%),
+    radial-gradient(circle at 82% 24%, rgba(56, 217, 169, 0.07), transparent 18%),
+    radial-gradient(circle at 50% 82%, rgba(255, 123, 123, 0.05), transparent 18%);
+}
+
+[data-theme="light"] .graph-tooltip,
+[data-theme="light"] .graph-hud-card,
+[data-theme="light"] .graph-legend,
+[data-theme="light"] .graph-selection-card,
+[data-theme="light"] .graph-compare-card,
+[data-theme="light"] .graph-loading__card,
+[data-theme="light"] .graph-minimap,
+[data-theme="light"] .empty-state-card {
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="light"] .graph-tooltip__divider {
+  background: rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="light"] .graph-loading {
+  background: rgba(244, 246, 251, 0.58);
+}
+
+/* =========================
+   Responsive
+   ========================= */
+
+@media (max-width: 960px) {
+  .graph-hud--top-left,
+  .graph-hud--top-right,
+  .graph-hud--bottom-left,
+  .graph-hud--bottom-right {
+    position: static;
+  }
+
+  .graph-hud {
+    position: static;
+    padding: var(--space-3);
+  }
+
+  .graph-legend,
+  .graph-hud-card,
+  .graph-selection-card,
+  .graph-compare-card {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .graph-tooltip {
+    max-width: 260px;
+  }
+}
+
+@media (max-width: 640px) {
+  .graph-stage::before {
+    background-size: 20px 20px;
+    opacity: 0.26;
+  }
+
+  .graph-tooltip {
+    min-width: 180px;
+    max-width: 220px;
+    padding: var(--space-3);
+  }
+
+  .graph-loading__card {
+    padding: var(--space-3) var(--space-4);
+  }
+}
